@@ -1,0 +1,26 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            {% for author in post.authors.all %}
+                <embed>{{ author }}, </embed>
+            {% endfor %}
+            <em>{{ post.created_date }}</em>
+        </div>
+        <embed>{{ post.section }}</embed>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.text|linebreaksbr }}</p>
+        {% if comments.empty %}
+            <div>There is no comments. You can be the first!</div>
+        {% else %}
+            <h4>Comments:</h4>        
+            {% for comment in comments %}
+                <div>
+                    <embed>{{ comment.author_name }}</embedde>
+                    <p>{{ comment.text }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
