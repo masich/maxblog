@@ -17,21 +17,20 @@
         </p>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
-    <p>Tags: {{ post.tags.all|join:", " }}</p>
-    {% if comments.empty %}
-        <div>There is no comments. You can be the first!</div>
-    {% else %}
-        <h4>Comments:</h4>
+    <p><em>Tags: {{ post.tags.all|join:", " }}</em></p>
+    {% if comments %}
+        <h4><em>Comments:</em></h4>
         {% for comment in comments %}
             <div>
                 <em>{{ comment.author_name }}</em>
                 <p class="post-comment-text">{{ comment.text }}</p>
             </div>
         {% endfor %}
+    {% else %}
+        <h4><em>There is no comments. You can be the first!</em></h4>
     {% endif %}
     <div>
-        <h4>Leave comment</h4>
-        <form method="POST" class="post-form">
+        <form method="POST" class="post-form" style="padding-top: 16px;">
             {% csrf_token %}
 
             {% for hidden_field in form.hidden_fields %}

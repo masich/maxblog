@@ -7,3 +7,7 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['author_name', 'text']
+        labels = {
+            'author_name': 'Your name',
+            'text': 'Comment'
+        }
