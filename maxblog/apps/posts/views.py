@@ -10,7 +10,7 @@ def post_list(request):
 
 def post_details(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comment_set.order_by('-id')
+    comments = post.comment_set.order_by('id')
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid:
