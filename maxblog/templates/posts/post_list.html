@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="blog-main" style="padding-top: 16px;">
-    {% for post in posts %}
+    {% for post in object_list %}
     <div class="blog-post" style="padding-left: 32px;">
         <h3 class="blog-post-title"><a href="{% url 'posts:post_details' pk=post.pk %}">{{ post.title }}</a></h3>
         <p class="blog-post-meta">
