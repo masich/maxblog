@@ -5,11 +5,6 @@ from .models import Post
 from .forms import CommentForm
 
 
-def post_list(request):
-    posts = Post.objects.order_by('-created_date')
-    return render(request, 'posts/post_list.html', {'object_list': posts})
-
-
 def post_details(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = post.comment_set.order_by('id')
@@ -30,7 +25,23 @@ class SearchPostsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Post.objects.filter(
-            Q(title__icontains=query) | Q(authors__username__icontains=query)
-        )
+        tag = self.request.GET.get('tag')
+        author = self.request.GET.get('author')
+        section = self.request.GET.get('section')
+
+        object_list = Post.objects.order_by('-created_date')
+
+        if query:
+            object_list = Post.objects.filter(
+                Q(title__icontains=query) | Q(authors__username__icontains=query))
+        if author:
+            object_list = object_list.filter(
+                Q(authors__username__icontains=author))
+        if tag:
+            object_list = object_list.filter(
+                Q(tags__name__icontains=tag))
+        if section:
+            object_list = object_list.filter(
+                Q(section__name__icontains=section))
+
         return object_list
