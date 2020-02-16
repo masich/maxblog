@@ -20,8 +20,15 @@ class Tag(models.Model):
         return self.name
 
 
+class PostAuthor(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
-    authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    authors = models.ManyToManyField(PostAuthor)
     title = models.CharField(max_length=100)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
