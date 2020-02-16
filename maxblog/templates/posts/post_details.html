@@ -1,12 +1,14 @@
 {% extends 'posts/base.html' %}
 
 {% load widget_tweaks %}
+{% load static %}
 
 {% block title %}
 {{ post.title }}
 {% endblock title %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'posts/css/posts.css' %}">
 <div style="padding: 32px; padding-top: 16px;">
     <div class="blog-post">
         <h2 class="blog-post-title">{{ post.title }}</h2>
