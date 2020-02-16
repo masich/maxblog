@@ -1,0 +1,7 @@
+<p class="blog-post-meta">
+    {{ post.created_date|date:'F d, y' }} by
+    {% for author in post.authors.all %}
+        <a href="{% url 'posts:search_posts' %}?author={{ author.name }}">{{ author.name }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    in <a href="{% url 'posts:search_posts' %}?section={{ post.section }}">{{ post.section }}</a>
+</p>

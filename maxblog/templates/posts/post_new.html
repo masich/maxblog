@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'posts/base.html' %}
 
 {% load widget_tweaks %}
 
-{% block title %}Feedback{% endblock title %}
+{% block title %}Create new post{% endblock title %}
 
 {% block content %}
 <div style="padding: 32px; padding-top: 16px;">
-    {% with submit_btn_text="Send feedback" %}
+    {% with submit_btn_text="Create post" %}
         {% include 'form.html' %}
     {% endwith %}
 </div>
