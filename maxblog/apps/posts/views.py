@@ -15,6 +15,7 @@ def post_details(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            return redirect('posts:post_details', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'posts/post_details.html', {'post': post, 'comments': comments, 'form': form})
@@ -34,10 +35,10 @@ class SearchPostsView(ListView):
 
         if query:
             object_list = object_list.filter(
-                Q(title__icontains=query) | Q(authors__username__icontains=query))
+                Q(title__icontains=query) | Q(authors__name__icontains=query))
         if author:
             object_list = object_list.filter(
-                Q(authors__username__icontains=author))
+                Q(authors__name__icontains=author))
         if tag:
             object_list = object_list.filter(
                 Q(tags__name__icontains=tag))
