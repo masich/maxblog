@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.template.defaultfilters import truncatechars
 
 
 class Section(models.Model):
@@ -35,6 +36,10 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
 
+    @property
+    def short_text(self):
+        return truncatechars(self.text, 100)
+
     def __str__(self):
         return self.title
 
@@ -43,6 +48,10 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author_name = models.CharField(max_length=100)
     text = models.TextField()
+
+    @property
+    def short_text(self):
+        return truncatechars(self.text, 100)
 
     def __str__(self):
         return self.author_name

@@ -4,8 +4,28 @@ from .models import PostAuthor, Post, Comment, Tag, Section
 
 # Register models to be available through admin panel
 
-admin.site.register(Post)
-admin.site.register(Comment)
-admin.site.register(Tag)
-admin.site.register(Section)
-admin.site.register(PostAuthor)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'short_text', 'created_date', 'section',)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'author_name', 'short_text',)
+
+
+class PostAuthorAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(Section, SectionAdmin)
+admin.site.register(PostAuthor, PostAuthorAdmin)
