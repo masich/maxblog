@@ -26,14 +26,14 @@ class SearchPostsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        tag = self.request.GET.get('tag')
         author = self.request.GET.get('author')
+        tag = self.request.GET.get('tag')
         section = self.request.GET.get('section')
 
         object_list = Post.objects.order_by('-created_date')
 
         if query:
-            object_list = Post.objects.filter(
+            object_list = object_list.filter(
                 Q(title__icontains=query) | Q(authors__username__icontains=query))
         if author:
             object_list = object_list.filter(
