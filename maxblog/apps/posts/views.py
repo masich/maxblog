@@ -55,6 +55,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.created_date = timezone.now()
             post.save()
+            form.save_m2m()
             return redirect('posts:post_details', pk=post.pk)
     else:
         form = PostForm()
