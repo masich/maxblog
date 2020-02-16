@@ -15,6 +15,7 @@ def post_details(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            return redirect('posts:post_details', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'posts/post_details.html', {'post': post, 'comments': comments, 'form': form})
