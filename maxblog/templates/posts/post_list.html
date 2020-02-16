@@ -12,6 +12,8 @@
         <p>{{ post.text|linebreaksbr|truncatechars:500 }}</p>
     </div>
     <hr>
+    {% empty %}
+        <h1 class="mt-5 container">There are no posts yet. You can <a href="{% url 'posts:post_new' %}">create</a> the first one!</h1>
     {% endfor %}
 </div>
 {% endblock %}
