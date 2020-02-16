@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.db.models import Q
+from django.utils import timezone
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 def post_details(request, pk):
@@ -45,3 +46,15 @@ class SearchPostsView(ListView):
                 Q(section__name__icontains=section))
 
         return object_list
+
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.created_date = timezone.now()
+            post.save()
+    else:
+        form = PostForm()
+    return render(request, 'posts/post_new.html', {'form': form})
