@@ -9,7 +9,7 @@
     <div class="blog-post" style="padding-left: 32px;">
         <h3 class="blog-post-title"><a href="{% url 'posts:post_details' pk=post.pk %}">{{ post.title }}</a></h3>
         {% include 'posts/post_meta.html' %}
-        <p>{{ post.text|linebreaksbr|truncatechars:500 }}</p>
+        <p>{{ post.text|truncatechars:500 }}</p>
     </div>
     <hr>
     {% empty %}
