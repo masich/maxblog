@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 from django.db.models import Q
 from django.utils import timezone
@@ -55,6 +55,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.created_date = timezone.now()
             post.save()
+            return redirect('posts:post_details', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'posts/post_new.html', {'form': form})
