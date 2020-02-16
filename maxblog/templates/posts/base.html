@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
-{% block header_content%}
+{% block navbar_list_items %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'posts:post_new' %}">New post<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock navbar_list_items %}
+
+{% block navbar_content %}
     <form action="{% url 'posts:search_posts' %}" class="form-inline my-2 my-lg-0">
         <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-{% endblock header_content%}
+{% endblock navbar_content %}
