@@ -1,15 +1,14 @@
 {% extends 'posts/base.html' %}
 
+{% load static %}
+
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'posts/css/posts.css' %}">
 <div class="blog-main" style="padding-top: 16px;">
-    {% for post in posts %}
+    {% for post in object_list %}
     <div class="blog-post" style="padding-left: 32px;">
         <h3 class="blog-post-title"><a href="{% url 'posts:post_details' pk=post.pk %}">{{ post.title }}</a></h3>
-        <p class="blog-post-meta">
-            {{ post.created_date|date:'F d, y' }} by
-            {{ post.authors.all|join:"," }}
-            in {{ post.section }}
-        </p>
+        {% include 'posts/post_meta.html' %}
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
     <hr>
