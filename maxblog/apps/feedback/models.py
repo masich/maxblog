@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import truncatechars
 
+
 class Feedback(models.Model):
     author_email = models.EmailField()
     text = models.TextField()
