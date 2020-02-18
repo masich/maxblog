@@ -35,7 +35,7 @@ class SearchPostsView(ListView):
 
         if query:
             object_list = object_list.filter(
-                Q(title__icontains=query) | Q(authors__name__icontains=query))
+                Q(title__icontains=query) | Q(authors__name__icontains=query)).distinct()
         if author:
             object_list = object_list.filter(
                 Q(authors__name__icontains=author))
